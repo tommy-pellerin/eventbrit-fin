@@ -1,0 +1,86 @@
+class EventsController < ApplicationController
+  before_action :authenticate_user!, except:[:index,:show]
+  
+
+  def index
+    @events = Event.all
+  end
+
+  def show    
+    @event = Event.find(params[:id])
+    @end_date = @event.end_date
+    puts "$ dans show"*10
+    puts @event
+    puts "$"*50
+    check_if_event_validated(@event) 
+  end
+
+  def new 
+    @event = Event.new
+  end
+
+  def create
+    puts "%"*50
+    puts "Lorsque je soumet la création de l'event :"
+    puts params    
+    puts event_params[:start_date]
+    
+    
+    puts "%"*50
+    @event = Event.new(title:event_params[:title],description:event_params[:description],start_date:event_params[:start_date],duration:event_params[:duration],price:event_params[:price],location:event_params[:location],admin:current_user)
+    EventSubmission.create(event:@event)
+
+    if @event.save
+      flash[:success] = "L'event a créé !"
+      redirect_to @event
+    else
+      flash[:danger] = "echec de création d'event !"
+      render "new", status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+      puts "%"*10
+      puts event_params       
+      puts "%"*10
+      if @event.update(title:event_params[:title],description:event_params[:description],start_date:event_params[:start_date],duration:event_params[:duration],price:event_params[:price],location:event_params[:location],admin:current_user)
+        flash[:success] = "L'event' a été mise à jour correctement."
+        redirect_to @event
+      else
+        render :edit
+      end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to root_path
+  end
+
+  
+
+  private
+  
+  def event_params
+    event_params = params.require(:event).permit(:title,:description,:start_date,:duration,:price,:location)
+  end  
+  
+  def check_if_event_validated(event) 
+    @event = event
+    puts "$ dans methode check"*10
+    puts @event
+    puts "$"*50
+    if @event.event_submission.validated == true
+      true
+    else 
+      redirect_to root_path, alert: "L'event est encours de validation"
+    end    
+  end
+
+
+end

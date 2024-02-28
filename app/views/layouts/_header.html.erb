@@ -1,0 +1,43 @@
+<header>
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="<%= root_path  %>">Eventbrite</a> 
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <%= link_to "Créer un event", new_event_path, class: "nav-link" %>            
+          </li>     
+          <% if user_signed_in? && current_user.is_admin == true %>
+          <li class="nav-item">
+            <%= link_to "Admin dashboard", admin_root_path, class: "nav-link" %>            
+          </li>     
+          <% end %>
+        </ul>
+        <ul class="navbar-nav">          
+          <% if user_signed_in? && current_user.avatar.attached?  %>
+            
+              <li class="nav-item me-3 text-light align-self-center"><%= link_to image_tag(current_user.avatar, width:"30px", height:"30px", class:"rounded-circle"), user_path(current_user) %></li>
+            
+          <% elsif user_signed_in? %>
+            <li class="nav-item me-3 text-light">Je suis <%= current_user.first_name %>  </li>
+          <% end %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Connexion</a>
+              <div class="dropdown-menu"> 
+                <% if user_signed_in? %> 
+                  <%= link_to "Mon profil", user_path(current_user.id), class: "dropdown-item" %>
+                  <%= link_to "Se deconnecter", destroy_user_session_path, method: :delete,data: {turbo: true,turbo_method: :delete,turbo_confirm: "Vous etes sure de vouloir vous déconnecter ?"}, class: "dropdown-item" %>
+                <% else %>
+                  <%= link_to "S'inscrire", new_user_registration_path, class: "dropdown-item" %>
+                  <%= link_to "Se connecter", new_user_session_path, class: "dropdown-item" %>                  
+                <% end %>
+              </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

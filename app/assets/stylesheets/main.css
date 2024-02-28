@@ -1,0 +1,77 @@
+body{
+  height: 100vh;
+}
+
+/* Form */
+.form-signin{
+  border:1px solid grey;
+}
+.submit-btn{
+  width:100%
+}
+
+/* banner */
+.carousel-img-box{
+height: 40rem;
+width:100%;
+}
+.bd-placeholder-img{
+  opacity: 0.8;
+  object-fit: cover;
+}
+/* small banner */
+.bg-img{
+  background-image: url(images/pexels-ksenia-chernaya-3951652.jpg);
+}
+
+/* cards */
+
+.media{
+  display: grid;
+  grid-template-columns: 0.5fr 11.5fr;
+}
+
+/* comments */
+.profil-img-container{
+  height: auto;
+  width: 3rem;
+  margin: 0.5rem;
+}
+.comment-profil-image{
+  object-fit: contain;
+}
+
+/* presentation ressources */
+.event-img-box{
+  height: 25rem;
+  width: 100%;
+  border-radius: 10rem;
+}
+.event-placeholder-img{
+  object-fit: contain;
+}
+.icone{
+  max-width: 50px;
+  max-height: 50px;
+}
+.rs-img-box{
+  height: 2rem;
+  width: auto;
+  margin: 0.5rem;
+}
+.rs-img{
+  object-fit: cover;
+}
+/* presentation element */
+.element-img-box{
+  height: 40rem;
+  width: auto;
+}
+.element-img{
+  object-fit: contain;
+}
+
+/* paiement */
+.paiement-organism{
+  height: 100vh;
+}

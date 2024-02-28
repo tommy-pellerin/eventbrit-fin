@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Bienvenue administrateur de mes 2...</h1>
+  <!--
+  <p>Insérer un utilisateur: <%= link_to "new user", new_admin_user_path, class: "btn btn-primary" %></p>
+  <p>Insérer un membre administrateur: <%= link_to "new admin", new_admin_admin_path, class: "btn btn-primary" %></p>
+  -->
+  <p>Nombre d'utilisateur : <%= @users.count %> </p>
+  <%= link_to "Voir les utilisateurs", admin_users_path, class: "btn btn-primary" %>
+  <br/><br/>
+  
+  <p>Nombre d'event à valider : <%= @event_submissions_to_validate.count %> </p>
+  <%= link_to "Voir tous les events", admin_event_submissions_path, class: "btn btn-primary" %>
+  <br/> <br/>
+  <div>
+    <p>Liste d'event à valider :
+    <% i = 0 %>
+    <% @event_submissions.each do |event_submission| %>
+      
+      <p>
+        <% if event_submission.reviewed == false%>
+          <%= i += 1 %> - 
+          id : <%= event_submission.id %> |
+          title : <%= event_submission.event.title %> |   
+          price : <%= event_submission.event.price %> |
+          <%= link_to "Show this event submission", edit_admin_event_submission_path(event_submission.id) %>       
+          
+        <% end %>
+        
+      </p>
+    <% end %>
+    
+  </div>
+    
+
+
+</div>

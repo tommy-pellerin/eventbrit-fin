@@ -1,0 +1,22 @@
+
+  <h1>Event submissions</h1>
+
+  <div>
+
+    <% i = 0 %>
+    <% @event_submissions.each do |event_submission| %>
+      
+      <p>
+        
+          <%= i += 1 %> - 
+          id : <%= event_submission.id %> |
+          title : <%= event_submission.event.title %> |   
+          price : <%= event_submission.event.price %> |
+          validated : <%= event_submission.validated %> |
+          reviewed : <%= event_submission.reviewed %> |
+          <%= link_to "Show this event submission", edit_admin_event_submission_path(event_submission.id) %>
+        
+      </p>
+    <% end %>
+  </div>
+

@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Participer à l'évent</h1>
+  <p>email : <%= current_user.email %></p>
+  <p>Event : <%= @event.title %></p>
+  <p>price : <%= @event.price %>€</p>
+
+<%= button_to "Passer commande", checkout_create_path(total: @event.price, event_id: @event.id), class: "btn btn-primary", data: {turbo: false} %>
+
+</div>

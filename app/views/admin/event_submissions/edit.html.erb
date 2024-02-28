@@ -1,0 +1,26 @@
+<div class = "container">   
+  <h1>Event submissoin number : <%= @event_submission.id %></h1>
+  <p>==> Validated ? : <%= @event_submission.validated %></p>
+  <p>==> Reviewed ? : <%= @event_submission.reviewed %></p>
+
+  <%if @event_submission.event.photo_event.attached?%>
+    <%= image_tag @event_submission.event.photo_event, alt: 'photo_event' %>
+  <%else%>
+    <p>=== Il n'y a pas encore de photo lié à cet event_submission.event ===</p>
+  <%end%>
+  <br> <br>
+  <p>title : <%= @event_submission.event.title %></p>
+  <p>description : <%= @event_submission.event.description %></p>
+  <p>nombre d'inscrit : <%= @event_submission.event.users.count %></p>
+  <p>créateur : <%= @event_submission.event.admin.first_name %></p>
+  <p>date de début : <%= @event_submission.event.start_date %></p>
+  <p>date de fin : <%= @end_date %></p>
+  <p>Lieu : <%= @event_submission.event.location %></p>
+  <p>prix : <%= @event_submission.event.price %>€</p>
+  <p>
+  <%= button_to "Accepter",  accept_event_admin_event_submission_path(@event_submission), method: :patch, data: { confirm: 'Êtes-vous sûr de vouloir accepter cet event?' }, class:"btn btn-success" %>
+  <%= button_to "Refuser",  reject_event_admin_event_submission_path(@event_submission), method: :patch, data: { confirm: 'Êtes-vous sûr de vouloir refuser cet event?' }, class:"btn btn-warning" %>
+  </p>
+  <%= link_to "Back to event_submission submissions", admin_root_path %>
+
+</div>
